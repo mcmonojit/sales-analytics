@@ -1,0 +1,86 @@
+# ============================================================================
+# PYTHON VIRTUAL ENVIRONMENTS & DEPENDENCIES
+# ============================================================================
+# Virtual environments should NOT be committed. Developers recreate them locally
+# using requirements.txt. Committing venv bloats the repo with platform-specific binaries.
+venv/
+env/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ============================================================================
+# PYCACHE & COMPILED FILES
+# ============================================================================
+# Python bytecode is auto-generated; committing it causes conflicts and waste.
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ============================================================================
+# IDE & EDITOR FILES
+# ============================================================================
+# IDE metadata is machine/user-specific; should never be in version control.
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# SECURITY: CREDENTIALS & SECRETS
+# ============================================================================
+# ⚠️ CRITICAL: Never commit credentials, API keys, or sensitive config files.
+# Use environment variables or a secrets manager instead.
+# Your config.py currently contains AWS credentials — move these to a .env file!
+config.py
+.env
+.env.local
+.env.*.local
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# ============================================================================
+# LOCAL DATA & LOGS
+# ============================================================================
+# These are environment-specific or temporary; each developer has their own.
+*.log
+logs/
+local_data/
+*.tmp
+*.cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ============================================================================
+# OS-SPECIFIC FILES
+# ============================================================================
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+
