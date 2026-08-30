@@ -7,6 +7,7 @@ from resources.dev import config
 from src.main.utils.s3_client import S3ClientManager
 from src.main.utils.logger import Logger
 from src.main.utils.mysql_client import MySQLClientManager
+from src.main.read.read_from_aws import S3reader
 import os
 
 # Initialize logger
@@ -27,7 +28,7 @@ logger.info(response)
 #     print(bucket['Name']) #returns just the bucket names in the S3 account
 
 
-# TODO:
+#TODO:
 # 1. Check if the local_directory contains files. These files were downloaded from s3 for previous runs of the job.
 # 2. Check if any of these files are also present in process_run_status table with status 'I'.
 # 3. If they are present in process_run_status with status 'I' - it means last run was unsuccessful and hence those files are still present in local_directory. Log message should be 'Files already present in local_directory. Last run unsuccessful.'
@@ -63,8 +64,19 @@ else:
     logger.info("No files in local_directory. Last run successful.")
 
 
-# TODO:
+#TODO:
 # 1. get all the absolute path of csv files present in the specific directory of the s3 bucket
 # 2. create a spearate class to download the csv files from the s3 bucket location
 # 3. next get a list of all files present in local directory after download
 # 4. filter only csv files and create their absolute path
+
+try:
+    s3_reader = S3reader()
+    s3_files_list = s3_reader.list_files_s3(s3_client, config.bucket_name, config.s3_source_directory)
+    if s3_files_list:
+        logger.info(f"List of csv files in S3 bucket: {s3_files_list}")
+    else:
+        logger.info(f"No csv files present in folder {config.s3_source_directory}.")
+        raise Exception("No data available to process.")
+except Exception as e:
+    logger.error(f"Process stopped with exception {e}")
